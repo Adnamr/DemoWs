@@ -20,8 +20,7 @@ import com.demows.lbvie.exceptions.res.ExceptionResponse;
 public class WsErrorController implements ErrorController {
 	
     private static final Logger log = LoggerFactory.getLogger(WsErrorController.class);
-
-	
+    
 	@RequestMapping("/error")
 	public ResponseEntity<Object> error(HttpServletRequest request) {
 		
