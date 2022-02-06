@@ -1,8 +1,6 @@
 package com.demows.lbvie.controller.error;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -14,16 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demows.lbvie.exceptions.res.ErrorResponse;
-import com.demows.lbvie.exceptions.res.ExceptionResponse;
 
-@RestController
-public class WsErrorController implements ErrorController {
+//@RestController
+//public class WsErrorController implements ErrorController {
 	
-    private static final Logger log = LoggerFactory.getLogger(WsErrorController.class);
-
-	@RequestMapping("/error")
-	public ResponseEntity<Object> error(HttpServletRequest request) {
-		
+//    private static final Logger log = LoggerFactory.getLogger(WsErrorController.class);
+//
+//	@RequestMapping("/error")
+//	public ResponseEntity<Object> error(HttpServletRequest request) {
+//		
 //	    Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 //	    
 //		Integer statusCode = Integer.valueOf(status.toString());
@@ -36,34 +33,36 @@ public class WsErrorController implements ErrorController {
 //			Error401(request);
 //		}
 //		return null;
+//
+//	}
+//	
+//	private ResponseEntity<Object> Error404(HttpServletRequest request)
+//	{
+//		ErrorResponse error = new ErrorResponse();
+//	    error.setMessage("URL not found");
+//		error.setCode(404);
+//		//error.setUrl(request.getRequestURI());
+//        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+//	}
+//	
+//	private ResponseEntity<Object> Error401(HttpServletRequest request)
+//	{
+////		ExceptionResponse error = new ExceptionResponse();
+////	    error.setErrorMessage("URL not Authorized");
+////		error.callerURL(request.getRequestURI());
+////		List<String> details = new ArrayList<String>();
+////		details.add(""+HttpStatus.UNAUTHORIZED);
+////		error.setDetails(details);
+////        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
+//		
+//		ErrorResponse error = new ErrorResponse();
+//	    error.setMessage("Not UNAUTHORIZED");
+//		error.setCode(401);
+//		//error.setUrl(request.getRequestURI());
+//        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
+//		
+//	}
 
-		ErrorResponse error = new ErrorResponse();
-	    error.setMessage("URL not found");
-		error.setCode(HttpStatus.NOT_FOUND.value());
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-		
-	}
-	
-	private ResponseEntity<Object> Error404(HttpServletRequest request)
-	{
-		ErrorResponse error = new ErrorResponse();
-	    error.setMessage("URL not found");
-		error.setCode(404);
-		//error.setUrl(request.getRequestURI());
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-	}
-	
-	private ResponseEntity<Object> Error401(HttpServletRequest request)
-	{
-		ExceptionResponse error = new ExceptionResponse();
-	    error.setErrorMessage("URL not Authorized");
-		error.callerURL(request.getRequestURI());
-		List<String> details = new ArrayList<String>();
-		details.add(""+HttpStatus.UNAUTHORIZED);
-		error.setDetails(details);
-        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
-	}
-
 	
 
-}
+//}

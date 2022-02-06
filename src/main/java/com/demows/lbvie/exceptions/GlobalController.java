@@ -3,6 +3,7 @@ package com.demows.lbvie.exceptions;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
@@ -16,8 +17,10 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import com.demows.lbvie.exceptions.res.ExceptionResponse;
@@ -99,6 +102,19 @@ public class GlobalController {
 		error.callerURL(request.getRequestURI());
         error.setDetails(errors);
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+	}
+	
+	//missing params
+	@ExceptionHandler(value = { MethodArgumentTypeMismatchException.class })
+	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+	@ResponseBody
+	public Map<String, String> handleServiceCallException(MethodArgumentTypeMismatchException e) {
+		Map<String, String> errMessages = new HashMap<>();
+		errMessages.put("error", "MethodArgumentTypeMismatchException");
+		errMessages.put("message", e.getMessage());
+		errMessages.put("parameter", e.getName());
+		errMessages.put("errorCode", e.getErrorCode());
+		return errMessages;
 	}
 	
 //	@ResponseStatus(HttpStatus.NOT_FOUND)
